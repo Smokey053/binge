@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  /* The Java side owns all controls; the page must never react to the mouse. */
+  #player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; border: 0; }
+</style>
+</head>
+<body>
+<div id="player"></div>
+<script>
+  // Thin bridge between the JavaFX UI and the YouTube IFrame API. JavaFX calls load(), setAudio(),
+  // play()/pause()/seek()/stop() and polls snap() a few times a second; nothing is pushed back.
+  var player = null, api = 'loading', err = 0, fresh = false, pendingId = null, vol = 80, muted = 0;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      width: '100%', height: '100%',
+      playerVars: { controls: 0, disablekb: 1, fs: 0, rel: 0, modestbranding: 1, playsinline: 1,
+                    iv_load_policy: 3, cc_load_policy: 0, autoplay: 1, origin: location.origin },
+      events: {
+        onReady: function () {
+          api = 'ready';
+          setAudio(vol, muted);
+          if (pendingId) { load(pendingId); }
+        },
+        onError: function (e) { err = e.data; fresh = false; },
+        onStateChange: function (e) { if (e.data === 1 || e.data === 3) { fresh = false; } }
+      }
+    });
+  }
+
+  function load(id) {
+    err = 0;
+    fresh = true;
+    if (player && api === 'ready') { pendingId = null; player.loadVideoById(id); }
+    else { pendingId = id; }
+  }
+  function setAudio(v, m) {
+    vol = v; muted = m;
+    if (player && api === 'ready') { player.setVolume(v); if (m) { player.mute(); } else { player.unMute(); } }
+  }
+  function play() { if (player && api === 'ready') player.playVideo(); }
+  function pause() { if (player && api === 'ready') player.pauseVideo(); }
+  function stop() { pendingId = null; fresh = false; if (player && api === 'ready') player.stopVideo(); }
+  function seek(s) { if (player && api === 'ready') player.seekTo(s, true); }
+
+  // api | playerState | time | duration | loadedFraction | errorCode
+  function snap() {
+    if (!player || api !== 'ready' || !player.getPlayerState) { return api + '|-2|0|0|0|' + err; }
+    var ps = fresh ? -1 : player.getPlayerState();
+    return api + '|' + ps + '|' + player.getCurrentTime() + '|' + player.getDuration() + '|' +
+           player.getVideoLoadedFraction() + '|' + err;
+  }
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>

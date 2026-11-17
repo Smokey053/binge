@@ -1,0 +1,57 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Java Debug: Maven Compile",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\.vscode\\binge-launch.ps1",
+				"-Goal",
+				"compile"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$maven"
+			]
+		},
+		{
+			"label": "Binge Maven Compile",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\.vscode\\binge-launch.ps1",
+				"-Goal",
+				"compile"
+			],
+			"problemMatcher": [
+				"$maven"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Binge Launch",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\.vscode\\binge-launch.ps1",
+				"-Goal",
+				"run"
+			],
+			"problemMatcher": [],
+			"isBackground": true
+		}
+	]
+}

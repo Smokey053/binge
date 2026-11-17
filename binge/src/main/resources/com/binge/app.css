@@ -1,0 +1,1051 @@
+/* =====================================================================================
+   Binge - application stylesheet.
+   Dark neutral surfaces with a warm orange accent.
+   Every colour below is a looked-up variable so the light theme only overrides this block.
+   ===================================================================================== */
+
+.app-shell {
+    -bg: #0d0c0b;
+    -surface: #151311;
+    -surface-2: #1a1714;
+    -surface-3: #211d19;
+    -border: #29241f;
+    -border-2: #332c25;
+    -text: #edf1fa;
+    -text-2: #e8edf7;
+    -muted: #a69d94;
+    -muted-2: #746b63;
+    -accent: #ff7a1a;
+    -accent-2: #ff9a45;
+    -accent-text: #ff8a2b;
+    -accent-dim: #b95516;
+    -on-accent: #211207;
+    -glass: rgba(21, 19, 17, 0.78);
+    -scroll-thumb: #3c352e;
+
+    -fx-background-color: -bg;
+    -fx-font-family: "Segoe UI Variable", "Inter", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.app-shell.light {
+    -bg: #f2f5f8;
+    -surface: #ffffff;
+    -surface-2: #ffffff;
+    -surface-3: #eef2f6;
+    -border: #e4e8ef;
+    -border-2: #dde3ec;
+    -text: #192133;
+    -text-2: #192133;
+    -muted: #64708a;
+    -muted-2: #8a94a8;
+    -accent-text: #c85300;
+    -glass: rgba(255, 255, 255, 0.82);
+    -scroll-thumb: #c4ccda;
+}
+
+.label {
+    -fx-text-fill: -text;
+}
+
+.icon {
+    -fx-background-color: -text;
+}
+
+/* ---------- Custom controls ------------------------------------------------------------ */
+
+.app-shell.keyboard-nav .pressable:focused {
+    -fx-effect: dropshadow(gaussian, -accent, 9, 0.55, 0, 0);
+}
+
+.pill-button {
+    -fx-padding: 11px 22px;
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-border-width: 1.5px;
+    -fx-border-color: transparent;
+}
+
+.pill-button .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.pill-button.primary {
+    -fx-background-color: -accent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.3), 18, 0.1, 0, 4);
+}
+
+.pill-button.primary:hover {
+    -fx-background-color: derive(-accent, 22%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.55), 26, 0.2, 0, 4);
+}
+
+.pill-button.primary .label {
+    -fx-text-fill: -on-accent;
+}
+
+.pill-button.primary .icon {
+    -fx-background-color: -on-accent;
+}
+
+.pill-button.ghost {
+    -fx-background-color: -surface-3;
+    -fx-border-color: -border-2;
+}
+
+.pill-button.ghost:hover {
+    -fx-border-color: -accent;
+    -fx-background-color: derive(-surface-3, 6%);
+}
+
+.pill-button.glass {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+    -fx-border-color: rgba(255, 255, 255, 0.28);
+}
+
+.pill-button.glass:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.26);
+    -fx-border-color: rgba(255, 255, 255, 0.6);
+}
+
+.pill-button.glass .label {
+    -fx-text-fill: white;
+}
+
+.pill-button.glass .icon {
+    -fx-background-color: white;
+}
+
+.icon-button {
+    -fx-background-radius: 999px;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(127, 140, 170, 0.22);
+}
+
+.icon-button:active .icon {
+    -fx-background-color: -accent-text;
+}
+
+.icon-button.glass {
+    -fx-background-color: rgba(9, 12, 20, 0.62);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-radius: 999px;
+}
+
+.icon-button.glass .icon {
+    -fx-background-color: white;
+}
+
+.icon-button.glass:hover {
+    -fx-background-color: -accent;
+    -fx-border-color: -accent;
+}
+
+.icon-button.glass:hover .icon {
+    -fx-background-color: -on-accent;
+}
+
+.icon-button.glass:active {
+    -fx-background-color: -accent;
+}
+
+.icon-button.glass:active .icon {
+    -fx-background-color: -on-accent;
+}
+
+.chip {
+    -fx-padding: 7px 16px;
+    -fx-background-color: -surface-2;
+    -fx-background-radius: 999px;
+    -fx-border-color: -border-2;
+    -fx-border-radius: 999px;
+}
+
+.chip .label {
+    -fx-text-fill: -muted;
+    -fx-font-weight: bold;
+}
+
+.chip:hover {
+    -fx-border-color: -accent-dim;
+}
+
+.chip:hover .label {
+    -fx-text-fill: -text;
+}
+
+.chip:selected {
+    -fx-background-color: -accent;
+    -fx-border-color: -accent;
+}
+
+.chip:selected .label {
+    -fx-text-fill: -on-accent;
+}
+
+/* Seek bar (video timeline and volume) */
+.seek-track {
+    -fx-background-color: rgba(255, 255, 255, 0.22);
+    -fx-background-radius: 6px;
+}
+
+.seek-buffer {
+    -fx-background-color: rgba(255, 255, 255, 0.34);
+    -fx-background-radius: 6px;
+}
+
+.seek-fill {
+    -fx-background-color: -accent;
+    -fx-background-radius: 6px;
+}
+
+.seek-thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 999px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.2, 0, 1);
+}
+
+/* ---------- Top navigation --------------------------------------------------------------- */
+
+.nav-bar {
+    -fx-background-color: linear-gradient(to bottom, rgba(8, 7, 6, 0.96), rgba(8, 7, 6, 0.78) 72%, rgba(8, 7, 6, 0));
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-min-height: 72px;
+    -fx-pref-height: 72px;
+    -fx-max-height: 72px;
+    -fx-effect: null;
+}
+
+.brand-logo {
+    -fx-background-color: transparent;
+}
+
+.brand-logo .icon {
+    -fx-background-color: -on-accent;
+}
+
+.brand-wordmark {
+    -fx-text-fill: -accent;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.nav-link {
+    -fx-padding: 10px 8px;
+    -fx-background-radius: 0;
+}
+
+.nav-link .label {
+    -fx-text-fill: -muted;
+    -fx-font-size: 14.5px;
+    -fx-font-weight: normal;
+}
+
+.nav-link:hover {
+    -fx-background-color: transparent;
+}
+
+.nav-link:hover .label {
+    -fx-text-fill: -text;
+}
+
+.nav-link:selected {
+    -fx-background-color: transparent;
+}
+
+.nav-link:selected .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.nav-badge {
+    -fx-background-color: -accent;
+    -fx-text-fill: -on-accent;
+    -fx-background-radius: 999px;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 1px 6px;
+}
+
+.search-box {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 6px;
+    -fx-border-color: rgba(255, 255, 255, 0.24);
+    -fx-border-radius: 6px;
+    -fx-padding: 0 8px 0 14px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+}
+
+.search-box .icon {
+    -fx-background-color: -muted;
+}
+
+.search-box:focused {
+    -fx-border-color: -accent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.28), 12, 0.1, 0, 0);
+}
+
+.settings-view {
+    -fx-background-color: -bg;
+}
+
+.settings-title {
+    -fx-text-fill: -text;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+
+.settings-card {
+    -fx-background-color: -surface;
+    -fx-background-radius: 14px;
+    -fx-border-color: -border;
+    -fx-border-radius: 14px;
+}
+
+.settings-row {
+    -fx-padding: 22px 24px;
+}
+
+.settings-row-separator {
+    -fx-border-color: -border transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.settings-row-icon {
+    -fx-background-color: -accent;
+}
+
+.settings-row-title {
+    -fx-text-fill: -text;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.settings-row-detail {
+    -fx-text-fill: -muted;
+    -fx-font-size: 12.5px;
+}
+
+.settings-row .pill-button {
+    -fx-min-width: 106px;
+}
+
+.settings-row .pill-button.selected {
+    -fx-background-color: rgba(255, 122, 26, 0.14);
+    -fx-border-color: -accent;
+}
+
+.search-field,
+.search-field:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: -text;
+    -fx-prompt-text-fill: -muted-2;
+    -fx-highlight-fill: -accent-dim;
+    -fx-highlight-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 4px 2px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* ---------- Scrolling pages ------------------------------------------------------------- */
+
+.page-scroll,
+.page-scroll > .viewport,
+.page-scroll .corner {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
+.page-scroll > .viewport {
+    -fx-background-color: -bg;
+}
+
+.page-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12px;
+    -fx-padding: 2px;
+}
+
+.page-scroll .scroll-bar .track,
+.page-scroll .scroll-bar .track-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.page-scroll .scroll-bar .thumb {
+    -fx-background-color: -scroll-thumb;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0;
+}
+
+.page-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: -accent-dim;
+}
+
+.page-scroll .scroll-bar .increment-button,
+.page-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-pref-height: 0;
+    -fx-background-color: transparent;
+}
+
+.page-scroll .scroll-bar .increment-arrow,
+.page-scroll .scroll-bar .decrement-arrow {
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.home-view,
+.gallery-view {
+    -fx-background-color: -bg;
+}
+
+.page-heading {
+    -fx-text-fill: -text;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.page-detail {
+    -fx-text-fill: -muted;
+    -fx-font-size: 14px;
+}
+
+.filter-label {
+    -fx-text-fill: -muted-2;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.empty-icon {
+    -fx-background-color: -muted-2;
+}
+
+.empty-title {
+    -fx-text-fill: -text;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.empty-message {
+    -fx-text-fill: -muted;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}
+
+/* ---------- Shelves and thumbnails ------------------------------------------------------ */
+
+.row-title {
+    -fx-text-fill: -text;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+}
+
+.see-all {
+    -fx-padding: 4px 8px;
+    -fx-background-radius: 6px;
+}
+
+.see-all .label {
+    -fx-text-fill: -accent-text;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.see-all:hover {
+    -fx-background-color: rgba(255, 122, 26, 0.12);
+}
+
+.page-dot {
+    -fx-background-color: transparent;
+}
+
+.page-dot:hover {
+    -fx-background-color: rgba(127, 140, 170, 0.25);
+    -fx-background-radius: 4px;
+}
+
+.carousel-arrow {
+    -fx-background-color: rgba(9, 12, 20, 0.78);
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-border-radius: 999px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 12, 0.2, 0, 3);
+}
+
+.carousel-arrow .icon {
+    -fx-background-color: white;
+}
+
+.carousel-arrow:hover {
+    -fx-background-color: -accent;
+    -fx-border-color: -accent;
+}
+
+.carousel-arrow:hover .icon {
+    -fx-background-color: -on-accent;
+}
+
+.poster-box {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-color: -border-2;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
+
+.movie-card:hover .poster-box,
+.app-shell.keyboard-nav .movie-card:focused .poster-box {
+    -fx-border-color: -accent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.35), 26, 0.12, 0, 8);
+}
+
+.poster-placeholder {
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.card-overlay {
+    -fx-background-color: linear-gradient(to top, rgba(5, 7, 12, 0.94) 0%, rgba(5, 7, 12, 0.35) 52%, rgba(5, 7, 12, 0.45) 100%);
+}
+
+.play-badge {
+    -fx-background-color: -accent;
+    -fx-background-radius: 999px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.65), 22, 0.25, 0, 0);
+}
+
+.play-badge .icon {
+    -fx-background-color: -on-accent;
+}
+
+.card-genres {
+    -fx-text-fill: rgba(255, 255, 255, 0.85);
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.card-title {
+    -fx-text-fill: -text-2;
+    -fx-font-size: 13.5px;
+    -fx-font-weight: bold;
+}
+
+.movie-card:hover .card-title {
+    -fx-text-fill: -accent-text;
+}
+
+.card-meta {
+    -fx-text-fill: -muted;
+    -fx-font-size: 11.5px;
+}
+
+/* ---------- Hero banner ------------------------------------------------------------------- */
+
+.hero {
+    -fx-background-color: #05070c;
+}
+
+.hero-shade-side {
+    -fx-background-color: linear-gradient(to right, rgba(9, 12, 20, 0.97) 0%, rgba(9, 12, 20, 0.78) 34%, rgba(9, 12, 20, 0.12) 74%, rgba(9, 12, 20, 0) 100%);
+}
+
+.hero-shade-bottom {
+    -fx-background-color: linear-gradient(to bottom, rgba(9, 12, 20, 0) 58%, -bg 100%);
+}
+
+.hero-tag {
+    -fx-text-fill: -on-accent;
+    -fx-background-color: -accent;
+    -fx-background-radius: 5px;
+    -fx-padding: 3px 9px;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.hero-title {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 12, 0.2, 0, 2);
+}
+
+.hero-title:long {
+    -fx-font-size: 38px;
+}
+
+.hero:compact .hero-title {
+    -fx-font-size: 36px;
+}
+
+.hero:compact .hero-title:long {
+    -fx-font-size: 30px;
+}
+
+.hero:narrow .hero-title {
+    -fx-font-size: 28px;
+}
+
+.hero-meta {
+    -fx-text-fill: rgba(255, 255, 255, 0.82);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.hero-synopsis {
+    -fx-text-fill: rgba(255, 255, 255, 0.86);
+    -fx-font-size: 15px;
+    -fx-line-spacing: 2px;
+}
+
+.hero:compact .hero-synopsis {
+    -fx-font-size: 14px;
+}
+
+.hero-dot {
+    -fx-background-color: transparent;
+}
+
+.hero-dot:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.18);
+    -fx-background-radius: 4px;
+}
+
+/* ---------- Trailer player ---------------------------------------------------------------- */
+
+.player-view {
+    -fx-background-color: #05070c;
+}
+
+.player-scroll > .viewport {
+    -fx-background-color: #05070c;
+}
+
+.player-topbar {
+    -fx-background-color: #05070c;
+}
+
+.player-topbar .icon {
+    -fx-background-color: white;
+}
+
+.topbar-label {
+    -fx-text-fill: #75809a;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.topbar-title {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.shortcut-hint {
+    -fx-text-fill: #59647e;
+    -fx-font-size: 11px;
+}
+
+.video-stage,
+.video-holder {
+    -fx-background-color: black;
+}
+
+.player-controls {
+    -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.97) 0%, rgba(0, 0, 0, 0.94) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.player-controls .icon {
+    -fx-background-color: white;
+}
+
+.player-controls .icon-button:hover .icon {
+    -fx-background-color: -accent;
+}
+
+.player-time {
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.flash-badge {
+    -fx-background-color: rgba(9, 12, 20, 0.68);
+    -fx-background-radius: 999px;
+}
+
+.flash-badge .icon {
+    -fx-background-color: white;
+}
+
+.player-info {
+    -fx-background-color: #05070c;
+}
+
+.player-title {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.player-meta {
+    -fx-text-fill: #9aa5bc;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.player-synopsis {
+    -fx-text-fill: #c4cbdb;
+    -fx-font-size: 15px;
+    -fx-line-spacing: 3px;
+}
+
+.genre-tag {
+    -fx-text-fill: -accent;
+    -fx-background-color: rgba(255, 122, 26, 0.1);
+    -fx-border-color: rgba(255, 122, 26, 0.35);
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-padding: 3px 12px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.player-view .movie-row .label,
+.player-view .movie-card .card-meta {
+    -fx-text-fill: #9aa5bc;
+}
+
+.player-view .row-title,
+.player-view .card-title {
+    -fx-text-fill: white;
+}
+
+.player-view .pill-button.ghost {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.22);
+}
+
+.player-view .pill-button.ghost .label {
+    -fx-text-fill: white;
+}
+
+.player-view .pill-button.ghost .icon {
+    -fx-background-color: white;
+}
+
+.player-view .pill-button.ghost:hover {
+    -fx-border-color: -accent;
+}
+
+.player-view .poster-box {
+    -fx-border-color: #202638;
+}
+
+/* Loading, end and error layers inside the video */
+.loading-layer {
+    -fx-background-color: #05070c;
+}
+
+.loading-dim {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 75%, rgba(5, 7, 12, 0.68), rgba(5, 7, 12, 0.96));
+}
+
+.loading-ripple {
+    -fx-fill: transparent;
+    -fx-stroke: -accent;
+    -fx-stroke-width: 2px;
+}
+
+.loading-disc {
+    -fx-fill: #1b2236;
+    -fx-stroke: -accent;
+    -fx-stroke-width: 3px;
+}
+
+.loading-hole {
+    -fx-fill: #05070c;
+    -fx-stroke: #b95516;
+    -fx-stroke-width: 1.5px;
+}
+
+.loading-hub {
+    -fx-fill: -accent;
+}
+
+.loading-sweep {
+    -fx-stroke: -accent;
+    -fx-stroke-width: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.78), 12, 0.3, 0, 0);
+}
+
+.loading-dot {
+    -fx-background-color: -accent;
+    -fx-background-radius: 999px;
+}
+
+.loading-title {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.loading-message {
+    -fx-text-fill: #9aa5bc;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.overlay-card {
+    -fx-background-color: rgba(5, 7, 12, 0.94);
+    -fx-padding: 28px;
+}
+
+.end-title {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.end-hint {
+    -fx-text-fill: #9aa5bc;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}
+
+.error-icon {
+    -fx-background-color: #ff8a8a;
+}
+
+/* ---------- Toast, splash, tooltips ------------------------------------------------------ */
+
+.toast {
+    -fx-background-color: rgba(23, 29, 43, 0.96);
+    -fx-background-radius: 999px;
+    -fx-border-color: -accent-dim;
+    -fx-border-radius: 999px;
+    -fx-padding: 11px 22px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 18, 0.2, 0, 4);
+}
+
+.toast .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.splash {
+    -fx-background-color: radial-gradient(center 50% 45%, radius 70%, #121a2b, #05070c);
+}
+
+.splash-logo {
+    -fx-background-color: #ff7a1a;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 122, 26, 0.6), 40, 0.25, 0, 0);
+}
+
+.splash-logo .icon {
+    -fx-background-color: #10221f;
+}
+
+.splash-letter {
+    -fx-text-fill: white;
+    -fx-font-size: 46px;
+    -fx-font-weight: bold;
+}
+
+.splash-tagline {
+    -fx-text-fill: #ff8a2b;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tooltip {
+    -fx-background-color: #171d2b;
+    -fx-text-fill: #edf1fa;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 10px;
+}
+
+/* ---------- Streaming-service polish ------------------------------------------------------ */
+
+.app-shell {
+    -fx-font-size: 14px;
+}
+
+.nav-bar {
+    -fx-background-color: linear-gradient(to bottom, rgba(13, 12, 11, 0.82) 0%, rgba(13, 12, 11, 0.48) 54%, rgba(13, 12, 11, 0) 100%);
+    -fx-min-height: 76px;
+    -fx-pref-height: 76px;
+    -fx-max-height: 76px;
+}
+
+.brand-wordmark {
+    -fx-font-size: 25px;
+    -fx-letter-spacing: 1.5px;
+}
+
+.nav-link {
+    -fx-padding: 12px 10px;
+}
+
+.nav-link:selected {
+    -fx-border-color: transparent transparent -accent transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.search-box {
+    -fx-background-color: rgba(255, 255, 255, 0.075);
+    -fx-border-color: rgba(255, 255, 255, 0.18);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.hero {
+    -fx-background-color: #080706;
+}
+
+.hero-shade-side {
+    -fx-background-color: linear-gradient(to right, rgba(13, 12, 11, 1) 0%, rgba(13, 12, 11, 0.88) 28%, rgba(13, 12, 11, 0.3) 58%, rgba(13, 12, 11, 0) 82%);
+}
+
+.hero-shade-bottom {
+    -fx-background-color: linear-gradient(to bottom, rgba(13, 12, 11, 0) 48%, -bg 100%);
+}
+
+.hero-title {
+    -fx-font-size: 54px;
+    -fx-line-spacing: -4px;
+}
+
+.hero-synopsis {
+    -fx-text-fill: rgba(255, 255, 255, 0.78);
+    -fx-font-size: 15.5px;
+}
+
+.hero-tag {
+    -fx-padding: 4px 10px;
+    -fx-background-radius: 4px;
+    -fx-letter-spacing: 0.7px;
+}
+
+.hero-dot:current,
+.page-dot:current {
+    -fx-background-color: -accent;
+    -fx-background-radius: 999px;
+}
+
+.hero-dot:current .icon,
+.page-dot:current .icon {
+    -fx-background-color: -accent;
+}
+
+.row-title {
+    -fx-font-size: 22px;
+}
+
+.movie-row {
+    -fx-padding: 9px 0 15px 0;
+}
+
+.poster-box {
+    -fx-background-color: -surface-2;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgba(255, 255, 255, 0.09);
+}
+
+.movie-card:hover .poster-box,
+.app-shell.keyboard-nav .movie-card:focused .poster-box {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.64), 20, 0.16, 0, 8);
+}
+
+.card-title {
+    -fx-font-size: 14px;
+}
+
+.card-meta {
+    -fx-text-fill: -muted-2;
+}
+
+.play-badge {
+    -fx-min-width: 56px;
+    -fx-min-height: 56px;
+    -fx-background-color: rgba(255, 122, 26, 0.96);
+}
+
+.chip {
+    -fx-padding: 8px 17px;
+    -fx-background-color: -surface-3;
+}
+
+.gallery-view .page-scroll > .viewport {
+    -fx-background-color: -bg;
+}
+
+.page-heading {
+    -fx-font-size: 34px;
+}
+
+.page-detail {
+    -fx-padding: 0 0 4px 0;
+}
+
+.settings-card {
+    -fx-background-color: linear-gradient(to bottom, -surface-2, -surface);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 24, 0.1, 0, 8);
+}
+
+.player-topbar {
+    -fx-background-color: linear-gradient(to bottom, #050504 0%, rgba(5, 5, 4, 0.94) 72%, rgba(5, 5, 4, 0) 100%);
+}
+
+.player-controls {
+    -fx-padding: 44px 26px 18px 26px;
+}
+
+.player-controls .icon-button {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 999px;
+}
+
+.player-controls .icon-button:hover {
+    -fx-background-color: rgba(255, 122, 26, 0.95);
+}
+
+.player-controls .icon-button:hover .icon {
+    -fx-background-color: -on-accent;
+}
+
+.player-info {
+    -fx-background-color: -bg;
+}
+
+.player-title {
+    -fx-font-size: 34px;
+}
+
+.app-shell.light .nav-bar {
+    -fx-background-color: linear-gradient(to bottom, rgba(242, 245, 248, 0.98), rgba(242, 245, 248, 0));
+}
+
+.app-shell.light .nav-link:selected .label {
+    -fx-text-fill: -text;
+}
+
+.app-shell.light .search-box {
+    -fx-background-color: rgba(25, 33, 51, 0.05);
+    -fx-border-color: -border-2;
+}
