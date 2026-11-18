@@ -24,14 +24,9 @@ import javafx.util.Duration;
 
 import java.util.regex.Pattern;
 
-/**
- * Plays YouTube trailers inside the application. A {@link WebView} hosts the official YouTube
- * IFrame player (served from {@link PlayerServer}); this class hides all of that behind plain
- * JavaFX properties and methods so the UI can draw its own custom controls. Video data is always
- * streamed from YouTube, nothing is stored locally.
- *
- * <p>All methods must be called on the JavaFX application thread.
- */
+/** Plays YouTube trailers inside the app. A link hosts the official YouTube IFrame player 
+(served by {PlayerServer}); this class hides that behind plain JavaFX properties and methods so the UI
+can draw its own controls. Video always streams from YouTube, nothing is stored locally.*/
 public final class YouTubePlayer {
 
     /** Playback state as seen by the UI. */
@@ -248,12 +243,13 @@ public final class YouTubePlayer {
         state.set(State.ERROR);
     }
 
-    /** True when the video owner disabled embedding, so the trailer can only be watched on youtube.com. */
+    /** True when the video owner disabled embedding, so the trailer can only be watched on 
+    youtube.com. */
     public static boolean isEmbeddingBlocked(int code) {
         return code == 101 || code == 150 || code == 152 || code == 153;
     }
 
-    /** A short user-facing explanation for a YouTube error code. */
+    /** A short user-friendly explanation for a YouTube error code. */
     public static String describeError(int code) {
         return switch (code) {
             case ERROR_TIMEOUT -> "We couldn't reach YouTube. Check your internet connection and try again.";

@@ -16,10 +16,8 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-/**
- * Shared scaffold of the grid pages (Browse, My List, Search results): a heading, an optional
- * filter bar, the responsive {@link PosterGrid} and an empty-state message.
- */
+/** Common layout for the grid pages (Browse, MyList, Search results): a heading,
+an optional filter bar, the responsive {link poster grid}, and an empty-state message*/
 public abstract class GalleryView extends StackPane {
 
     private final Label heading = new Label();

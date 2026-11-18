@@ -29,11 +29,9 @@ import javafx.util.Duration;
 
 import java.util.function.Consumer;
 
-/**
- * The application shell: top navigation, the swappable pages and the overlays (trailer player,
- * toast messages, start-up splash). It implements {@link Navigator}, so every component asks the
- * shell to open trailers or switch pages instead of knowing about each other.
- */
+/** The main app frame: top navigation, switchable pages, and overlays (trailer player, toast messages,
+startup splash). It implements {Link navigator}, so components ask the shell to open up trailers or 
+change pages instead of talking to each other*/
 public final class AppShell extends StackPane implements Navigator {
 
     private static final double COMPACT_WIDTH = 1020;
@@ -220,7 +218,7 @@ public final class AppShell extends StackPane implements Navigator {
         applyWidth(COMPACT_WIDTH + 1);
     }
 
-    /** Hides the floating bar while reading down the page and restores it when scrolling back up. */
+    /** Hides the navigation  bar while reading down the page and restores it when scrolling back up. */
     private void wireFloatingNavigation() {
         addEventFilter(ScrollEvent.SCROLL, e -> {
             if (player.isShowing() || Math.abs(e.getDeltaX()) >= Math.abs(e.getDeltaY()) || e.getDeltaY() == 0) {

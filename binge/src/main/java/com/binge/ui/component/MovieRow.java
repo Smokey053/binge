@@ -37,10 +37,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A labelled shelf of movies, like a row on Netflix. Exactly {@value #VISIBLE} thumbnails are
- * visible at any window size (cards grow and shrink with the window); the rest are reached by
- * paging with the arrows, the page dots, the keyboard (tab), a horizontal scroll gesture or a swipe.
+/** A labelled shelf of movies, like a row on Netflix. The thumbnails are
+ visible at any window size (cards grow and shrink with the window); the rest are reached by
+ paging with the arrows, the page dots, the keyboard (tab), a horizontal scroll gesture or a swipe.
  */
 public final class MovieRow extends VBox {
 

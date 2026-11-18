@@ -29,10 +29,9 @@ import javafx.util.Duration;
 
 import java.util.List;
 
-/**
- * The large featured banner at the top of the home page. It cross-fades through the featured
- * movies every few seconds (paused while the pointer is over it) and offers one-click trailer
- * playback and a My List toggle.
+/** The large featured banner at the top of the home page. It cross-fades through the featured
+ movies every few seconds (paused while the pointer is over it) and offers one-click trailer
+ playback and a My List toggle.
  */
 public final class HeroBanner extends StackPane {
 

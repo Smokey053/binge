@@ -30,11 +30,9 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
-/**
- * The full-window trailer player: a top bar, the {@link VideoStage}, movie details and a
- * "More like this" shelf. It owns the {@link YouTubePlayer}, handles keyboard shortcuts and
- * full-screen mode, and lays itself out for any window size.
- */
+/** the full-window trailer player: a top bar, the {link VideoStage}, movie details, and a 
+"More like this" shelf. it owns the {YouTubePlayer link}, handles keyboard shortcuts
+and full-screen mode and adapts to every window size.*/
 public final class PlayerView extends StackPane {
 
     private static final double SEEK_STEP = 5;

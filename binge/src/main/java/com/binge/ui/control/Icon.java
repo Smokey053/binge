@@ -3,9 +3,8 @@ package com.binge.ui.control;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.SVGPath;
 
-/**
- * A scalable vector icon. The glyph is a CSS-coloured {@link Region} shaped by an SVG path, so
- * its colour follows the {@code icon} style class and any parent override (see app.css).
+/** A scalable vector icon. The glyph is a CSS-coloured {@link Region} shaped by an SVG path, so
+ its colour follows the {@code icon} style class and any parent override (see app.css).
  */
 public final class Icon extends Region {
 

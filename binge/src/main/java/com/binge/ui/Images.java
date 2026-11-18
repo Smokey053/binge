@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/** Resolves poster and backdrop artwork from TMDB without bundling copyrighted images. */
+/** Fetches poster and backdrop images from TMDB without bundling copyrighted images. */
 public final class Images {
 
     private static final Credentials TMDB_CREDENTIALS = configuredTmdbCredentials();

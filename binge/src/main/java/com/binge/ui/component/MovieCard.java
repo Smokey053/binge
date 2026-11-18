@@ -28,10 +28,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-/**
- * A movie thumbnail with its title underneath. Hovering lifts the card, zooms the poster,
- * adds an accent glow and reveals a play badge, a "My List" toggle and the genres. Clicking
- * the poster or the title opens the trailer.
+/** A movie thumbnail with its title underneath. Hovering lifts the card, zooms the poster,
+ adds an accent glow and reveals a play badge, a "My List" toggle, and the genres. Clicking
+ the poster or the title opens the trailer.
  */
 public final class MovieCard extends VBox {
 
@@ -87,7 +86,7 @@ public final class MovieCard extends VBox {
         return movie;
     }
 
-    /** Resizes the card; the poster keeps a 2:3 ratio. */
+    /** Resizes the card. */
     public void setCardWidth(double width) {
         setMinWidth(width);
         setPrefWidth(width);

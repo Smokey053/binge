@@ -33,10 +33,9 @@ import javafx.util.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * The 16:9 video area: the YouTube WebView plus everything layered on top of it - the custom
- * loading animation, buffering indicator, play/pause flash, end card, error panel and the
- * auto-hiding control bar. Clicking the picture toggles playback, double-clicking toggles full screen.
+/** The 16:9 video area: the YouTube WebView plus everything layered on top of it - the custom
+loading animation, buffering indicator, play/pause flash, end card, error panel and the
+auto-hiding control bar. Clicking the picture toggles playback, double-clicking toggles full screen.
  */
 final class VideoStage extends StackPane {
 

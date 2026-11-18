@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Every movie in one grid, filtered by genre category and sortable. */
+/** All movies in one grid, filtered by genre category and sortable. */
 public final class BrowseView extends GalleryView {
 
     /** Sort orders offered next to the category chips. */

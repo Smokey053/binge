@@ -9,12 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
-/**
- * Base class of every clickable element in the app. The assignment forbids
- * {@code javafx.scene.control.Button}, so all buttons are built from plain layout nodes that
- * react to the mouse and keyboard, play feedback sounds and are styled entirely through CSS
- * ({@code :hover}, {@code :pressed}, {@code :focused} and custom pseudo-classes).
- */
+/** Base class of every clickable element in the app.*/
 public abstract class Pressable extends StackPane {
 
     private Runnable onAction = () -> { };
