@@ -13,9 +13,8 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-/**
- * The landing page: the featured hero banner, the viewer's own shelves (recently watched and
- * My List when they exist) and one labelled row per genre category.
+/**The landing page: the featured hero banner, the viewer's own shelves (recently watched and
+ My List when they exist) and one labelled row per genre category.
  */
 public final class HomeView extends StackPane {
 
