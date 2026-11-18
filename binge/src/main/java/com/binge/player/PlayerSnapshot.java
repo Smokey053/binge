@@ -2,12 +2,8 @@ package com.binge.player;
 
 import java.util.Locale;
 
-/**
- * One reading of the JavaScript bridge in {@code player.html}, sent as
- * {@code api|playerState|time|duration|loadedFraction|errorCode}.
- *
- * @param playerState YouTube state: -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued, -2 API not ready
- */
+/** One reading from the JavaScript bridge in {player.html}, sent as 
+{api|playerstate|time|duration|loadedFraction|errorCode}*/
 record PlayerSnapshot(String api, int playerState, double time, double duration, double loaded, int error) {
 
     /** Returns {@code null} when the text is missing or malformed (e.g. the page is still loading). */
