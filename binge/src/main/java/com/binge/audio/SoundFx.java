@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Plays the UI sound effects. Clips are synthesised once, written to a temporary folder (JavaFX
  * {@link AudioClip} needs a URL) and played with low latency. If the machine has no usable audio
- * device the service quietly disables itself instead of failing.
+ * It turns itself off quietly instead of crashing.
  */
 public final class SoundFx {
 
