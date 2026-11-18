@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-/** Loads the movie catalog bundled with the application. */
+/** Reads the movie catalog ships with the application. */
 public final class CatalogRepository {
 
-    /** Classpath location of the catalog description. */
+    /** Where the catalog lives on the classpath */
     public static final String CATALOG_RESOURCE = "/com/binge/catalog.json";
 
     private CatalogRepository() {
