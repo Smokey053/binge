@@ -18,15 +18,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Per-user state that survives restarts: the "My List" shelf, recently watched trailers and
- * the sound / theme preferences. Everything is stored as one small JSON file.
- */
+/** Saves per-user data across restarts: the My List shelf, recent trailers, and sound/theme settings.
+All stored in one small JSON file. */
 public final class UserLibrary {
 
     private static final int MAX_RECENT = 10;
 
-    /** On-disk representation. */
+    /** What is written on the disk */
     public record Snapshot(List<String> myList, List<String> recent, boolean soundEnabled, boolean lightTheme) {
         public Snapshot {
             myList = myList == null ? List.of() : List.copyOf(myList);
@@ -52,7 +50,7 @@ public final class UserLibrary {
         lightTheme.addListener((o, a, b) -> save());
     }
 
-    /** Library stored in {@code ~/.binge/library.json}. */
+    /** Library kept at {@code ~/.binge/library.json}. */
     public static UserLibrary atDefaultLocation() {
         return new UserLibrary(Path.of(System.getProperty("user.home"), ".binge", "library.json"));
     }
@@ -77,12 +75,13 @@ public final class UserLibrary {
         return myList.contains(movie.id());
     }
 
-    /** A binding that stays in sync with the My List shelf; used by cards and buttons. */
+    /** A binding that stays in sync with the My List, used by cards and buttons. */
     public BooleanBinding inMyListBinding(Movie movie) {
         return Bindings.createBooleanBinding(() -> myList.contains(movie.id()), myList);
     }
 
-    /** Adds the movie when absent, removes it otherwise. Returns {@code true} if it is now in the list. */
+    /** Adds the movie when absent, removes it otherwise. 
+    Returns {@code true} if it is now in the list. */
     public boolean toggleMyList(Movie movie) {
         if (myList.remove(movie.id())) {
             return false;
@@ -91,7 +90,7 @@ public final class UserLibrary {
         return true;
     }
 
-    /** Records a trailer view; the newest entry always comes first and duplicates are collapsed. */
+    /** Records a trailer view. Newest entry always comes first and duplicates are merged. */
     public void addRecent(Movie movie) {
         loading = true;
         try {
