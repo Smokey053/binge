@@ -18,9 +18,8 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-/**
- * Binge - a Netflix-style movie streaming demo. Browse genre shelves, hover thumbnails for a
- * preview, and watch official trailers streamed straight from YouTube with fully custom controls.
+/** Binge - a Netflix-style movie streaming demo. Browse genre shelves, hover thumbnails for a
+ preview, and watch official trailers streamed straight from YouTube with fully custom controls.
  */
 public class App extends Application {
 
