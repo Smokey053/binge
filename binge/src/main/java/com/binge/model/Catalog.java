@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-/** The full movie library: genre categories plus the ids highlighted in the hero banner. */
+/** The full movie library: genre categories plus the ids shown in the hero banner. */
 public record Catalog(List<String> featured, List<Category> categories) {
 
     public Catalog {
@@ -29,13 +29,13 @@ public record Catalog(List<String> featured, List<Category> categories) {
         return categories.stream().filter(c -> c.id().equals(id)).findFirst();
     }
 
-    /** Movies shown in the hero banner; falls back to the first movies when none are configured. */
+    /** Movies shown in the hero banner. If none are set, falls back to the first few movies. */
     public List<Movie> featuredMovies() {
         List<Movie> picked = featured.stream().map(this::find).flatMap(Optional::stream).toList();
         return picked.isEmpty() ? stream().limit(5).toList() : picked;
     }
 
-    /** The category a movie belongs to. */
+    /** The category that a movie belongs to. */
     public Optional<Category> categoryOf(Movie movie) {
         return categories.stream().filter(c -> c.movies().contains(movie)).findFirst();
     }
@@ -47,7 +47,7 @@ public record Catalog(List<String> featured, List<Category> categories) {
                 .orElse(List.of());
     }
 
-    /** Case-insensitive search over title, director, genre, year and synopsis; best matches first. */
+    /** Search that ignores case over title, director, genre, year and synopsis; best matches first. */
     public List<Movie> search(String query) {
         return stream()
                 .filter(m -> m.score(query) > 0)
