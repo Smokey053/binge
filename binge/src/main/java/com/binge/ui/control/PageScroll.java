@@ -6,9 +6,8 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
 
-/**
- * Vertical page scroller used by every view: content always fits the width, there is no horizontal
- * bar, and the mouse wheel moves a comfortable distance regardless of the page height.
+/** Vertical page scroller used by every view: content always fits the width, there is no horizontal
+ bar, and the mouse wheel moves a comfortable distance regardless of the page height.
  */
 public final class PageScroll extends ScrollPane {
 
