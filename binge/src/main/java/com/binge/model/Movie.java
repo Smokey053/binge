@@ -3,12 +3,7 @@ package com.binge.model;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * A single movie in the catalog. Instances are immutable and are read straight from {@code catalog.json}.
- *
- * @param id        stable slug used for persistence
- * @param trailerId YouTube video id of the official trailer (played through the embedded player)
- */
+/** One movie in the catalog. Instances cannot change and are read straight from {catalog.json}*/
 public record Movie(
         String id,
         String title,
@@ -22,17 +17,17 @@ public record Movie(
         genres = genres == null ? List.of() : List.copyOf(genres);
     }
 
-    /** Link to the trailer on youtube.com, used as a fallback when embedding is blocked. */
+    /** Link to the trailer on youtube.com, used when embedded player is blocked. */
     public String watchUrl() {
         return "https://www.youtube.com/watch?v=" + trailerId;
     }
 
-    /** "Action • Crime • Drama" */
+    /** Genres joined like "Action • Crime • Drama" */
     public String genreLine() {
         return String.join("  •  ", genres);
     }
 
-    /** "2008  •  Christopher Nolan" */
+    /** Year and Director joined like "2008  •  Christopher Nolan" */
     public String metaLine() {
         return year + "  •  " + director;
     }
