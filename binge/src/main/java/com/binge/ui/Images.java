@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 /** Resolves poster and backdrop artwork from TMDB without bundling copyrighted images. */
 public final class Images {
 
-    private static final String API_KEY = configuredApiKey();
+    private static final Credentials TMDB_CREDENTIALS = configuredTmdbCredentials();
     private static final String API_ROOT = "https://api.themoviedb.org/3";
     private static final String IMAGE_ROOT = "https://image.tmdb.org/t/p/";
     private static final String WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php";
@@ -36,9 +36,13 @@ public final class Images {
     private Images() {
     }
 
-    private static String configuredApiKey() {
-        String environmentKey = System.getenv("TMDB_API_KEY");
-        return environmentKey == null || environmentKey.isBlank() ? null : environmentKey;
+    private static Credentials configuredTmdbCredentials() {
+        String accessToken = System.getenv("TMDB_ACCESS_TOKEN");
+        if (accessToken != null && !accessToken.isBlank()) {
+            return new Credentials(accessToken.strip(), true);
+        }
+        String apiKey = System.getenv("TMDB_API_KEY");
+        return apiKey == null || apiKey.isBlank() ? null : new Credentials(apiKey.strip(), false);
     }
 
     /** Loads a movie poster asynchronously; the callback always runs on the JavaFX thread. */
@@ -61,17 +65,20 @@ public final class Images {
 
     private static CompletableFuture<Artwork> artwork(Movie movie) {
         return ARTWORK.computeIfAbsent(movie.id(), ignored -> {
-            if (API_KEY == null || API_KEY.isBlank()) {
+            if (TMDB_CREDENTIALS == null) {
                 if (MISSING_KEY_REPORTED.compareAndSet(false, true)) {
-                    System.err.println("Binge: TMDB_API_KEY is not set; using the public poster fallback.");
+                    System.err.println("Binge: TMDB_ACCESS_TOKEN or TMDB_API_KEY is not set; using the public poster fallback.");
                 }
                 return requestWikipedia(movie);
             }
             return requestTmdb(movie)
-                    .exceptionally(error -> {
-                        System.err.println("Binge: could not load TMDB artwork for '" + movie.title()
-                                + "': " + error.getMessage());
-                        return Artwork.EMPTY;
+                    .handle((artwork, error) -> {
+                        if (error != null) {
+                            System.err.println("Binge: could not load TMDB artwork for '" + movie.title()
+                                    + "': " + rootMessage(error));
+                            return Artwork.EMPTY;
+                        }
+                        return artwork;
                     })
                     .thenCompose(artwork -> artwork.poster() == null
                             ? requestWikipedia(movie)
@@ -81,13 +88,19 @@ public final class Images {
 
     private static CompletableFuture<Artwork> requestTmdb(Movie movie) {
         String title = URLEncoder.encode(movie.title(), StandardCharsets.UTF_8);
-        URI uri = URI.create(API_ROOT + "/search/movie?api_key=" + API_KEY
-                + "&include_adult=false&language=en-US&query=" + title + "&year=" + movie.year());
-        HttpRequest request = HttpRequest.newBuilder(uri)
+        String authentication = TMDB_CREDENTIALS.bearer()
+                ? ""
+                : "&api_key=" + URLEncoder.encode(TMDB_CREDENTIALS.value(), StandardCharsets.UTF_8);
+        URI uri = URI.create(API_ROOT + "/search/movie?include_adult=false&language=en-US&query=" + title
+                + "&year=" + movie.year() + authentication);
+        HttpRequest.Builder builder = HttpRequest.newBuilder(uri)
                 .timeout(Duration.ofSeconds(15))
                 .header("Accept", "application/json")
-                .GET()
-                .build();
+                .GET();
+        if (TMDB_CREDENTIALS.bearer()) {
+            builder.header("Authorization", "Bearer " + TMDB_CREDENTIALS.value());
+        }
+        HttpRequest request = builder.build();
         return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() / 100 != 2) {
@@ -117,7 +130,7 @@ public final class Images {
                 })
                 .exceptionally(error -> {
                     System.err.println("Binge: could not load fallback poster for '" + movie.title()
-                            + "': " + error.getMessage());
+                            + "': " + rootMessage(error));
                     return Artwork.EMPTY;
                 });
     }
@@ -157,6 +170,14 @@ public final class Images {
         return value != null && !value.isNull() ? value.asText() : null;
     }
 
+    private static String rootMessage(Throwable error) {
+        Throwable cause = error;
+        while (cause.getCause() != null) {
+            cause = cause.getCause();
+        }
+        return cause.getMessage() == null ? cause.getClass().getSimpleName() : cause.getMessage();
+    }
+
     private static Image image(String path, String size) {
         if (path == null) {
             return null;
@@ -170,4 +191,7 @@ public final class Images {
     private record Artwork(String poster, String backdrop) {
         private static final Artwork EMPTY = new Artwork(null, null);
     }
+
+    /** TMDB supports a current bearer token as well as the legacy v3 API-key query parameter. */
+    private record Credentials(String value, boolean bearer) { }
 }

@@ -13,15 +13,16 @@ import javafx.beans.property.StringProperty;
 import javafx.css.PseudoClass;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /** The top bar: brand, page tabs, search and settings. */
@@ -35,8 +36,6 @@ public final class NavBar extends HBox {
     private static final double SEARCH_FOCUSED = 270;
 
     private final Map<Page, NavLink> links = new EnumMap<>(Page.class);
-    private final HBox brand = new HBox(10);
-    private final Label wordmark = new Label("BINGE");
     private final TextField search = new TextField();
     private final HBox searchBox = new HBox(8);
     private final IconButton clear = new IconButton(Icons.CLOSE, 14, "Clear search");
@@ -51,17 +50,15 @@ public final class NavBar extends HBox {
         setAlignment(Pos.CENTER);
         setSpacing(14);
 
-        brand.setAlignment(Pos.CENTER_LEFT);
-        StackPane logo = new StackPane(new Icon(Icons.FILM, 20));
+        ImageView logo = new ImageView(new Image(Objects.requireNonNull(
+                NavBar.class.getResourceAsStream("/com/binge/branding/binge-logo.png"))));
+        logo.setPreserveRatio(true);
+        logo.setFitHeight(34);
+        logo.setSmooth(true);
         logo.getStyleClass().add("brand-logo");
-        logo.setMinSize(36, 36);
-        logo.setMaxSize(36, 36);
-        wordmark.getStyleClass().add("brand-wordmark");
-        Pressable brandButton = new Pressable() {
-            { getStyleClass().add("brand"); }
-        };
-        brand.getChildren().addAll(logo, wordmark);
-        brandButton.getChildren().add(brand);
+        Pressable brandButton = new Pressable() { };
+        brandButton.getStyleClass().add("brand");
+        brandButton.getChildren().add(logo);
         brandButton.setOnAction(() -> navigate(Page.HOME));
 
         HBox tabs = new HBox(8);
@@ -159,15 +156,13 @@ public final class NavBar extends HBox {
         links.get(Page.MY_LIST).setBadge(count);
     }
 
-    /** Compact mode hides the tab captions and the wordmark so the bar fits narrow windows. */
+    /** Compact mode hides tab captions so the bar fits narrow windows. */
     public void setCompact(boolean compact) {
         if (this.compact == compact) {
             return;
         }
         this.compact = compact;
         links.values().forEach(link -> link.setLabelVisible(!compact));
-        wordmark.setVisible(!compact);
-        wordmark.setManaged(!compact);
         resizeSearch(search.isFocused() || !search.getText().isEmpty());
     }
 

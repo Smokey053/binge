@@ -7,25 +7,26 @@ YouTube trailer playback. The interface uses a dark orange theme and supports li
 
 - JDK 23 or newer
 - Maven 3.9 or newer
-- A TMDB API key for posters and backdrops
+- A TMDB API read-access token (recommended), or a legacy v3 API key, for posters and backdrops
 
 ## Configuration
 
-Set `TMDB_API_KEY` in your environment. Do not add a key to the repository.
+Set `TMDB_ACCESS_TOKEN` (recommended) or `TMDB_API_KEY` in your environment. Do not add a credential to the repository.
 
 PowerShell:
 
 ```powershell
-$env:TMDB_API_KEY = "your-key"
+$env:TMDB_ACCESS_TOKEN = "your-read-access-token"
 ```
 
 To persist the key for your Windows user:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("TMDB_API_KEY", "your-key", "User")
+[Environment]::SetEnvironmentVariable("TMDB_ACCESS_TOKEN", "your-read-access-token", "User")
 ```
 
-The app uses Wikipedia poster fallbacks when TMDB is unavailable.
+The app first requests TMDB artwork, then falls back to a Wikipedia poster if TMDB is unavailable,
+returns no matching poster, or no TMDB credential is configured.
 
 ## Build and run
 

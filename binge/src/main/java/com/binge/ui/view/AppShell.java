@@ -19,7 +19,6 @@ import javafx.application.HostServices;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -74,10 +73,8 @@ public final class AppShell extends StackPane implements Navigator {
         pages.getChildren().addAll(home, browse, myList, searchView, settingsView);
         pages.getChildren().forEach(p -> p.setVisible(false));
 
-        // The bar deliberately floats over the page: on Home its translucent gradient becomes
-        // part of the featured backdrop rather than a separate, boxed header.
         StackPane.setAlignment(navBar, Pos.TOP_CENTER);
-        StackPane.setMargin(navBar, new Insets(6, 0, 0, 0));
+        navBar.setMaxWidth(Double.MAX_VALUE);
         getChildren().addAll(pages, navBar, player, toast);
 
         wireNavigation();

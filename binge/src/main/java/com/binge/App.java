@@ -5,18 +5,14 @@ import com.binge.data.CatalogRepository;
 import com.binge.data.UserLibrary;
 import com.binge.model.Catalog;
 import com.binge.ui.UiSound;
-import com.binge.ui.Icons;
-import com.binge.ui.control.Icon;
 import com.binge.ui.view.AppShell;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -56,7 +52,8 @@ public class App extends Application {
         stage.setMinHeight(Math.min(600, screen.getHeight()));
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        stage.getIcons().add(createAppIcon());
+        stage.getIcons().add(new Image(Objects.requireNonNull(
+                App.class.getResourceAsStream("/com/binge/branding/binge-logo.png"))));
         stage.setOnCloseRequest(e -> Platform.exit());
         stage.show();
 
@@ -72,20 +69,6 @@ public class App extends Application {
         if (shell != null) {
             shell.dispose();
         }
-    }
-
-    /** Renders the brand mark into an image for the window icon. */
-    private static Image createAppIcon() {
-        StackPane tile = new StackPane(new Icon(Icons.FILM, 34));
-        tile.setStyle("-fx-background-color: #ff7a1a; -fx-background-radius: 14;");
-        tile.setMinSize(64, 64);
-        tile.setMaxSize(64, 64);
-        tile.getChildren().get(0).setStyle("-fx-background-color: #211207;");
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-        Scene scene = new Scene(tile, Color.TRANSPARENT);
-        scene.getRoot().applyCss();
-        return tile.snapshot(params, null);
     }
 
     public static void main(String[] args) {
