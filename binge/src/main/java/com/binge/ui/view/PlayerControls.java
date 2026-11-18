@@ -18,11 +18,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-/**
- * The custom transport bar drawn over the video: timeline, play/pause, skip controls, volume,
- * elapsed / total time and the full-screen switch. Every control is a plain node (no
- * {@code Button}) wired to the {@link YouTubePlayer} properties.
- */
+/** Teh custom control bar drawn over the video: timeline, play/pause, skip, buttons, 
+volume, elapsed/totaltime, and the full-screen toggle. Every control is a plain node
+{button} wired to the YouTubePlayer properties*/
 final class PlayerControls extends VBox {
 
     private final YouTubePlayer player;
@@ -133,7 +131,7 @@ final class PlayerControls extends VBox {
         });
     }
 
-    /** A circular skip control. Direction is conveyed by the arrow without a numeric overlay. */
+    /** A circular skip control. The arrow shows the direction, with no number drawn on it. */
     private Pressable skipButton(double seconds, boolean forward) {
         Pressable button = new Pressable() {
             {
