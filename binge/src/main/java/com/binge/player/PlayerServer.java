@@ -10,12 +10,9 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Serves the tiny HTML page that hosts the YouTube IFrame player from {@code http://127.0.0.1}.
- * YouTube refuses to play embedded videos from {@code file:} or {@code about:} origins, so the
- * page must come from a real HTTP origin. Nothing but this single page is ever served, and only
- * to the local machine.
- */
+/** Serves the small HTML page that hosts the YouTube IFrame player from {http://127.0.0.1}.
+YouTube won't play embedded videos from {file} or {about} origins, so the page needs a real HTTP origin. 
+Only this one page is served, and only to the local machine. */
 final class PlayerServer implements AutoCloseable {
 
     private static final String PAGE_RESOURCE = "/com/binge/player.html";
