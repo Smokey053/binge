@@ -8,9 +8,8 @@ import javafx.scene.layout.Region;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A responsive wall of thumbnails. The number of columns follows the available width so cards
- * never get smaller than {@value #MIN_CARD_WIDTH}px; the leftover space is shared between them.
+/** A responsive wall of thumbnails. The number of columns follows the available width so cards
+ never get smaller than {MIN_CARD_WIDTH}px; the leftover space is shared between them.
  */
 public final class PosterGrid extends Region {
 
