@@ -11,9 +11,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * Plays the UI sound effects. Clips are synthesised once, written to a temporary folder (JavaFX
- * {@link AudioClip} needs a URL) and played with low latency. If the machine has no usable audio
- * It turns itself off quietly instead of crashing.
+  Plays the UI sound effects. Sounds are generated once, and  saved to a temporary folder (JavaFX
+  needs a URL) and played fast (with low latency). If there is no audio device,
+  It turns itself off quietly instead of crashing.
  */
 public final class SoundFx {
 
@@ -49,7 +49,7 @@ public final class SoundFx {
         }
     }
 
-    /** Renders the clips in advance so the first hover does not stutter. */
+    /** Pre-builds all sounds so the first hover plays without lag */
     public void warmUp() {
         for (Sound sound : Sound.values()) {
             try {
