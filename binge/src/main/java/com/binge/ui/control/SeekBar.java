@@ -16,10 +16,9 @@ import javafx.util.Duration;
 
 import java.util.function.DoubleConsumer;
 
-/**
- * A custom slider (no {@code Slider} control) used for the video timeline and the volume.
- * The value runs from 0 to 1. {@code onScrub} fires continuously while dragging and
- * {@code onCommit} once when the pointer is released.
+/** A custom slider (no {@code Slider} control) used for the video timeline and the volume.
+ The value runs from 0 to 1. {@code onScrub} fires continuously while dragging and
+ {@code onCommit} once when the pointer is released.
  */
 public final class SeekBar extends Region {
 
