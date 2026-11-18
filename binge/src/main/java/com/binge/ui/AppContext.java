@@ -5,7 +5,7 @@ import com.binge.data.UserLibrary;
 import com.binge.model.Catalog;
 import javafx.application.HostServices;
 
-/** Shared services handed to every view and component (poor man's dependency injection). */
+/** Shared services handed to every view and component (a simple form of dependency injection). */
 public record AppContext(
         Catalog catalog,
         UserLibrary library,
