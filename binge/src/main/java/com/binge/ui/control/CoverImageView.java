@@ -6,10 +6,9 @@ import javafx.scene.layout.Region;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.shape.Rectangle;
 
-/**
- * Shows an image scaled to <em>cover</em> the available area (like CSS {@code object-fit: cover}),
- * cropping the overflow instead of stretching. The crop is anchored with {@code focusY} so faces
- * and titles in portrait posters stay visible.
+/**Shows an image scaled to <em>cover</em> the available area (like CSS {@code object-fit: cover}),
+ cropping the overflow instead of stretching. The crop is anchored with {@code focusY} so faces
+ and titles in portrait posters stay visible.
  */
 public final class CoverImageView extends Region {
 
