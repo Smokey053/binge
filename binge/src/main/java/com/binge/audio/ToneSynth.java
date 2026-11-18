@@ -1,8 +1,7 @@
 package com.binge.audio;
 
-/**
- * Minimal additive synthesiser used to build the UI sound effects in memory, so the project
- * does not need to ship any audio assets. All buffers are mono, normalised to the range [-1, 1].
+/** Small synth that builds sounds in memory, so no audio files are needed. All
+buffers are mono and scaled to [-1,1].
  */
 public final class ToneSynth {
 
@@ -11,9 +10,8 @@ public final class ToneSynth {
     private ToneSynth() {
     }
 
-    /**
-     * A decaying tone whose pitch glides from {@code startHz} to {@code endHz}.
-     * A quiet second harmonic gives it a slightly warmer, "bell" character.
+    /** A fading tone that slides in pitch from the startHz to endHz. 
+    A quiet second harmonic adds a warmer, bell-like feel
      */
     public static double[] tone(double startHz, double endHz, double seconds, double gain) {
         int n = (int) (seconds * SAMPLE_RATE);
@@ -30,7 +28,7 @@ public final class ToneSynth {
         return out;
     }
 
-    /** Soft filtered-noise "swish" with a bell-shaped envelope, used for carousel scrolling. */
+    /** Soft filtered-noise "swish" witha bell-shaped envelope, used for carousel scrolling */
     public static double[] swish(double seconds, double gain) {
         int n = (int) (seconds * SAMPLE_RATE);
         double[] out = new double[n];
@@ -44,7 +42,8 @@ public final class ToneSynth {
         return out;
     }
 
-    /** Overlays {@code layer} on {@code base} starting {@code offsetSeconds} in; the result may be longer than both. */
+    /**Stacks layer on top of base, starting  offsetSeconds in. 
+    The result may be longer than both. */
     public static double[] mix(double[] base, double[] layer, double offsetSeconds) {
         int offset = (int) (offsetSeconds * SAMPLE_RATE);
         double[] out = new double[Math.max(base.length, offset + layer.length)];
